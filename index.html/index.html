@@ -3,32 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding RSVP & Music</title>
+    <title>Undangan Perkahwinan</title>
     <style>
         body, html {
             margin: 0;
             padding: 0;
             width: 100%;
-            height: 100%;
+            min-height: 100%;
             background: #111827;
             font-family: sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             color: white;
             text-align: center;
         }
         .box {
+            box-sizing: border-box;
             background: #1f2937;
             padding: 40px;
             border-radius: 16px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            max-width: 90%;
-            width: 400px;
+            width: min(400px, 90%);
         }
         .btn {
             display: block;
+            box-sizing: border-box;
             margin-top: 20px;
             background-color: #2563eb;
             color: white;
@@ -45,55 +45,47 @@
         .btn:hover {
             background-color: #1d4ed8;
         }
+        #statusText {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #d1d5db;
+        }
     </style>
 </head>
 <body>
-
-    <div class="box">
+    <main class="box">
         <h2>Undangan Perkahwinan</h2>
-        <p style="margin-top: 10px; font-size: 0.95rem; color: #9ca3af;" id="statusText">Memuatkan muzik latar belakang...</p>
-        
-        <!-- Butang untuk terus buka laman RSVP Canva -->
-        <button class="btn" id="openBtn">Buka Laman RSVP 💌</button>
-    </div>
+        <p id="statusText">Tekan butang untuk mula memainkan lagu dan membuka jemputan.</p>
+        <button class="btn" id="openBtn" type="button">Buka Laman RSVP 💌</button>
+    </main>
 
-    <!-- Elemen Audio Tersembunyi (Autoplay) -->
-    <audio id="bgMusic" autoplay loop preload="auto">
+    <!-- Pastikan fail Music.mp3 berada di lokasi yang sama dengan fail HTML ini. -->
+    <audio id="bgMusic" loop preload="auto">
         <source src="Music.mp3" type="audio/mpeg">
+        Pelayar anda tidak menyokong audio.
     </audio>
 
     <script>
         const audio = document.getElementById('bgMusic');
         const openBtn = document.getElementById('openBtn');
         const statusText = document.getElementById('statusText');
+        const rsvpUrl = 'https://flying-lemur-9kfrww.my.canva.site/perkahwinan-syahiramira';
 
-        // Cuba mainkan audio secara automatik sebaik sahaja web dibuka
-        window.addEventListener('DOMContentLoaded', () => {
-            audio.play().then(() => {
-                statusText.innerText = "Muzik sedang dimainkan secara automatik 🎶";
-            }).catch(error => {
-                statusText.innerText = "Sila klik di mana-mana skrin atau butang untuk aktifkan muzik.";
-            });
-        });
+        openBtn.addEventListener('click', async () => {
+            // Buka RSVP di tab baharu supaya halaman ini kekal terbuka untuk memainkan lagu.
+            const rsvpTab = window.open(rsvpUrl, '_blank');
 
-        // Jika pelayar sekat autoplay, sentuhan atau klik pertama di mana-mana skrin akan terus hidupkan lagu
-        ['click', 'touchstart', 'scroll'].forEach(eventType => {
-            window.addEventListener(eventType, () => {
-                if (audio.paused) {
-                    audio.play();
-                    statusText.innerText = "Muzik sedang dimainkan 🎶";
-                }
-            }, { once: true });
-        });
-
-        // Apabila tetamu klik butang buka RSVP, ia buka tab baru ke Canva
-        openBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
+            try {
+                await audio.play();
+                statusText.textContent = 'Lagu sedang dimainkan. Halaman RSVP dibuka di tab baharu 🎶';
+            } catch (error) {
+                statusText.textContent = 'Laman RSVP dibuka. Jika lagu tidak berbunyi, semak fail Music.mp3 dan cuba tekan butang sekali lagi.';
             }
-            window.open('https://flying-lemur-9kfrww.my.canva.site', '_blank');
+
+            if (!rsvpTab) {
+                statusText.textContent = 'Pelayar menyekat tab baharu. Benarkan pop-up atau buka pautan RSVP secara manual. Lagu akan dimainkan di halaman ini selepas butang ditekan.';
+            }
         });
     </script>
-
 </body>
 </html>
