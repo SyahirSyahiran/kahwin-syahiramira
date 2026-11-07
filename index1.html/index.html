@@ -3,97 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding RSVP & Music</title>
+    <meta name="theme-color" content="#f8f1eb">
+    <title>Jemputan Perkahwinan | Syahir &amp; Amira</title>
     <style>
-        body, html {
+        :root {
+            --ink: #493b36;
+            --muted: #806f67;
+            --rose: #a86668;
+            --rose-dark: #8e5356;
+            --paper: #fffaf6;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
             margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background: #111827;
-            font-family: sans-serif;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            color: var(--ink);
+            font-family: Georgia, 'Times New Roman', serif;
+            text-align: center;
+            background:
+                radial-gradient(ellipse at 12% 12%, rgba(255,255,255,.9), transparent 38%),
+                radial-gradient(ellipse at 90% 85%, rgba(225,190,177,.45), transparent 40%),
+                linear-gradient(135deg, #f8f1eb, #eadbd2);
+        }
+
+        .invitation {
+            position: relative;
+            width: min(100%, 470px);
+            padding: 52px 34px 42px;
+            overflow: hidden;
+            background: rgba(255, 250, 246, .94);
+            border: 1px solid rgba(168, 102, 104, .28);
+            border-radius: 220px 220px 24px 24px;
+            box-shadow: 0 24px 70px rgba(73, 59, 54, .16);
+            animation: arrive .8s ease-out both;
+        }
+
+        .invitation::before,
+        .invitation::after {
+            position: absolute;
+            content: "✿";
+            color: rgba(168, 102, 104, .22);
+            font-size: 88px;
+            line-height: 1;
+            pointer-events: none;
+        }
+        .invitation::before { top: 24px; left: 18px; transform: rotate(-24deg); }
+        .invitation::after { right: 18px; bottom: 18px; transform: rotate(22deg); }
+
+        .eyebrow {
+            margin: 0 0 20px;
+            color: var(--rose);
+            font-family: Arial, sans-serif;
+            font-size: .72rem;
+            letter-spacing: .24em;
+            text-transform: uppercase;
+        }
+
+        .divider {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            color: white;
-            text-align: center;
+            justify-content: center;
+            gap: 12px;
+            margin: 0 auto 18px;
+            color: var(--rose);
+            font-size: 1.15rem;
         }
-        .box {
-            background: #1f2937;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            max-width: 90%;
-            width: 400px;
+        .divider::before,
+        .divider::after {
+            width: 42px;
+            height: 1px;
+            content: "";
+            background: #d7b8ad;
         }
-        .btn {
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2.5rem, 11vw, 3.8rem);
+            font-weight: normal;
+            line-height: 1.05;
+        }
+        .ampersand {
             display: block;
-            margin-top: 20px;
-            background-color: #2563eb;
-            color: white;
-            padding: 14px 20px;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            font-size: 1rem;
-            text-align: center;
-            cursor: pointer;
-            border: none;
-            width: 100%;
+            margin: 5px 0;
+            color: var(--rose);
+            font-size: 2rem;
+            font-style: italic;
         }
-        .btn:hover {
-            background-color: #1d4ed8;
+        .message {
+            max-width: 310px;
+            margin: 24px auto 0;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .button {
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            min-height: 54px;
+            margin-top: 30px;
+            padding: 14px 20px;
+            color: white;
+            background: var(--rose);
+            border: 0;
+            border-radius: 999px;
+            box-shadow: 0 8px 20px rgba(142, 83, 86, .23);
+            font-family: Arial, sans-serif;
+            font-size: .95rem;
+            font-weight: 700;
+            letter-spacing: .04em;
+            cursor: pointer;
+            transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+        }
+        .button:hover {
+            background: var(--rose-dark);
+            box-shadow: 0 11px 24px rgba(142, 83, 86, .3);
+            transform: translateY(-2px);
+        }
+        .button:focus-visible { outline: 3px solid #d6a5a0; outline-offset: 4px; }
+
+        .footer {
+            position: relative;
+            z-index: 1;
+            margin: 22px 0 0;
+            color: #a38e84;
+            font-family: Arial, sans-serif;
+            font-size: .7rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+        }
+
+        @keyframes arrive {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
         }
     </style>
 </head>
 <body>
+    <main class="invitation">
+        <p class="eyebrow">Jemputan Perkahwinan</p>
+        <div class="divider" aria-hidden="true">❦</div>
+        <h1>Syahir<span class="ampersand">&amp;</span>Amira</h1>
+        <p class="message">Dengan penuh kesyukuran dan sukacita, kami menjemput anda meraikan hari bahagia kami.</p>
+        <button class="button" id="openBtn" type="button">
+            <span aria-hidden="true">♡</span> INVITATION CARD
+        </button>
+        <p class="footer">Dengan kasih, kami menanti kehadiran anda</p>
+    </main>
 
-    <div class="box">
-        <h2>Undangan Perkahwinan</h2>
-        <p style="margin-top: 10px; font-size: 0.95rem; color: #9ca3af;" id="statusText">Memuatkan muzik latar belakang...</p>
-        
-        <!-- Butang untuk terus buka laman RSVP Canva -->
-        <button class="btn" id="openBtn">Buka Laman RSVP 💌</button>
-    </div>
-
-    <!-- Elemen Audio Tersembunyi (Autoplay) -->
-    <audio id="bgMusic" autoplay loop preload="auto">
-        <source src="Music.mp3" type="audio/mpeg">
+    <!-- Letakkan Music.mp3 dalam folder yang sama dengan fail HTML ini. -->
+    <audio id="bgMusic2" loop preload="auto">
+        <source src="Music2.mp3" type="audio/mpeg">
+        Pelayar anda tidak menyokong audio.
     </audio>
 
     <script>
-        const audio = document.getElementById('bgMusic');
+        const audio = document.getElementById('bgMusic2');
         const openBtn = document.getElementById('openBtn');
-        const statusText = document.getElementById('statusText');
+        const rsvpUrl = 'https://flying-lemur-9kfrww.my.canva.site/perkahwinan-syahiramira';
 
-        // Cuba mainkan audio secara automatik sebaik sahaja web dibuka
-        window.addEventListener('DOMContentLoaded', () => {
-            audio.play().then(() => {
-                statusText.innerText = "Muzik sedang dimainkan secara automatik 🎶";
-            }).catch(error => {
-                statusText.innerText = "Sila klik di mana-mana skrin atau butang untuk aktifkan muzik.";
-            });
-        });
+        openBtn.addEventListener('click', async () => {
+            // Buka RSVP di tab baharu supaya halaman ini kekal terbuka untuk memainkan lagu.
+            window.open(rsvpUrl, '_blank', 'noopener,noreferrer');
 
-        // Jika pelayar sekat autoplay, sentuhan atau klik pertama di mana-mana skrin akan terus hidupkan lagu
-        ['click', 'touchstart', 'scroll'].forEach(eventType => {
-            window.addEventListener(eventType, () => {
-                if (audio.paused) {
-                    audio.play();
-                    statusText.innerText = "Muzik sedang dimainkan 🎶";
-                }
-            }, { once: true });
-        });
-
-        // Apabila tetamu klik butang buka RSVP, ia buka tab baru ke Canva
-        openBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
+            try {
+                await audio.play();
+            } catch (error) {
+                // Audio might not be available or playback may be blocked by the browser.
+                console.error('Audio playback failed:', error);
             }
-            window.open('https://flying-lemur-9kfrww.my.canva.site', '_blank');
         });
     </script>
-
 </body>
 </html>
