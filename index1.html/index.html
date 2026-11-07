@@ -4,130 +4,128 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#f3e5cf">
-    <title>Walimatulrus | Amira &amp; Syahir</title>
+    <title>Walimatulurus | Amira &amp; Syahir</title>
     <style>
         :root {
-            --ink: #493b36;
-            --muted: #806f67;
-            --rose: #a86668;
+            --ink: #4b342d;
+            --muted: #8a7266;
+            --rose: #b97679;
             --rose-dark: #8e5356;
-            --leaf: #849078;
+            --paper: #fffaf4;
+            --leaf: #89917b;
         }
-
         * { box-sizing: border-box; }
-
         body {
-            position: relative;
-            isolation: isolate;
             min-height: 100vh;
             margin: 0;
             display: grid;
             place-items: center;
-            padding: 28px 20px;
+            padding: 22px 16px;
             color: var(--ink);
             font-family: Georgia, 'Times New Roman', serif;
             text-align: center;
-            background-color: #efe2ce;
-            background-image:
-                linear-gradient(rgba(248, 239, 222, .12), rgba(248, 239, 222, .12)),
-                url('imej.png');
-            background-position: center;
-            background-size: cover;
-            background-attachment: fixed;
+            background: #efe2ce url('imej.png') center / cover fixed no-repeat;
         }
-
-        /* Cahaya bergerak perlahan di atas imej latar yang dimuat naik. */
-        body::before {
-            position: fixed;
-            z-index: -1;
-            inset: -25%;
-            content: "";
-            pointer-events: none;
-            background:
-                radial-gradient(ellipse at 18% 28%, rgba(212,154,157,.17), transparent 30%),
-                radial-gradient(ellipse at 78% 68%, rgba(155,171,139,.15), transparent 32%),
-                radial-gradient(ellipse at 55% 12%, rgba(255,255,255,.28), transparent 35%);
-            animation: softBloom 24s ease-in-out infinite alternate;
-        }
-
         .invitation {
             position: relative;
-            width: min(100%, 470px);
-            padding: 58px 34px 42px;
+            isolation: isolate;
+            width: min(100%, 560px);
+            min-height: min(760px, calc(100vh - 44px));
+            padding: clamp(62px, 10vh, 92px) clamp(28px, 7vw, 58px) 48px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
-            background: rgba(255, 250, 246, .88);
-            border: 1px solid rgba(168, 102, 104, .34);
-            border-radius: 220px 220px 28px 28px;
-            box-shadow: 0 24px 70px rgba(73, 59, 54, .2);
-            backdrop-filter: blur(2px);
+            background: rgba(255, 250, 244, .94);
+            border: 1px solid rgba(168, 102, 104, .28);
+            border-radius: 48% 48% 30px 30px / 25% 25% 30px 30px;
+            box-shadow: 0 24px 70px rgba(73, 59, 54, .22);
             animation: arrive .8s ease-out both;
         }
-
         .invitation::before,
         .invitation::after {
             position: absolute;
-            color: rgba(168, 102, 104, .2);
-            font-size: 88px;
+            z-index: -1;
+            color: rgba(168, 102, 104, .18);
             line-height: 1;
             pointer-events: none;
         }
-        .invitation::before { content: "✿"; top: 20px; left: 16px; transform: rotate(-24deg); }
-        .invitation::after { content: "❀"; right: 14px; bottom: 12px; transform: rotate(20deg); }
-
-        .floral-sprig {
+        .invitation::before {
+            content: "✿";
+            top: 28px;
+            left: 18px;
+            font-size: clamp(64px, 12vw, 94px);
+            transform: rotate(-24deg);
+        }
+        .invitation::after {
+            content: "❀";
+            right: 18px;
+            bottom: 20px;
+            font-size: clamp(66px, 12vw, 96px);
+            transform: rotate(20deg);
+        }
+        .corner-sprig {
             position: absolute;
-            color: rgba(132, 144, 120, .58);
-            font-size: 1.6rem;
+            top: 28%;
+            color: rgba(132, 144, 120, .6);
+            font-size: 1.65rem;
             pointer-events: none;
         }
-        .sprig-left { top: 155px; left: 20px; transform: rotate(-28deg); }
-        .sprig-right { top: 155px; right: 20px; transform: scaleX(-1) rotate(-28deg); }
-
+        .corner-left { left: 16px; transform: rotate(-25deg); }
+        .corner-right { right: 16px; transform: scaleX(-1) rotate(-25deg); }
         .eyebrow {
-            margin: 0 0 20px;
+            margin: 0 0 28px;
             color: var(--rose);
             font-family: Arial, sans-serif;
-            font-size: .72rem;
-            letter-spacing: .24em;
+            font-size: .75rem;
+            letter-spacing: .25em;
             text-transform: uppercase;
         }
         .divider {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            margin: 0 auto 18px;
+            gap: 14px;
+            margin: 0 auto 24px;
             color: var(--rose);
             font-size: 1.15rem;
         }
         .divider::before,
         .divider::after {
-            width: 42px;
+            width: 48px;
             height: 1px;
             content: "";
-            background: linear-gradient(90deg, transparent, #d7b8ad);
+            background: #d7b8ad;
         }
-        .divider::after { transform: scaleX(-1); }
-
         h1 {
             margin: 0;
-            font-size: clamp(2.5rem, 11vw, 3.8rem);
+            font-size: clamp(3.2rem, 11vw, 5rem);
             font-weight: normal;
-            line-height: 1.05;
+            line-height: .98;
         }
         .ampersand {
             display: block;
-            margin: 5px 0;
+            margin: 10px 0;
             color: var(--rose);
-            font-size: 2rem;
+            font-size: clamp(2rem, 6vw, 2.7rem);
             font-style: italic;
+            line-height: 1;
         }
         .message {
-            max-width: 310px;
-            margin: 24px auto 0;
+            max-width: 390px;
+            margin: 30px auto 0;
             color: var(--muted);
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: clamp(1.05rem, 3.4vw, 1.25rem);
+            line-height: 1.75;
+        }
+        .cover-art {
+            display: block;
+            width: min(150px, 38vw);
+            max-height: 118px;
+            margin: 20px auto -4px;
+            object-fit: contain;
+            filter: drop-shadow(0 8px 10px rgba(73, 59, 54, .12));
         }
         .button {
             position: relative;
@@ -137,33 +135,30 @@
             justify-content: center;
             gap: 10px;
             width: 100%;
-            min-height: 54px;
-            margin-top: 30px;
-            padding: 14px 20px;
-            color: white;
-            background: linear-gradient(135deg, #b97879, var(--rose-dark));
+            min-height: 58px;
+            margin-top: 20px;
+            padding: 15px 20px;
+            color: #fff;
+            background: linear-gradient(110deg, #bd7c7d, #92575a);
             border: 0;
             border-radius: 999px;
-            box-shadow: 0 8px 20px rgba(142, 83, 86, .23);
+            box-shadow: 0 10px 24px rgba(142, 83, 86, .22);
             font-family: Arial, sans-serif;
             font-size: .95rem;
             font-weight: 700;
-            letter-spacing: .04em;
+            letter-spacing: .035em;
             cursor: pointer;
-            transition: background .2s ease, transform .2s ease, box-shadow .2s ease;
+            transition: transform .2s ease, box-shadow .2s ease;
         }
-        .button:hover {
-            background: linear-gradient(135deg, var(--rose), var(--rose-dark));
-            box-shadow: 0 11px 24px rgba(142, 83, 86, .3);
-            transform: translateY(-2px);
-        }
+        .button:hover { box-shadow: 0 13px 28px rgba(142, 83, 86, .3); transform: translateY(-2px); }
         .button:focus-visible { outline: 3px solid #d6a5a0; outline-offset: 4px; }
         .footer {
-            margin: 22px 0 0;
-            color: #8c756a;
+            margin: 24px 0 0;
+            color: #927d71;
             font-family: Arial, sans-serif;
-            font-size: .7rem;
+            font-size: .72rem;
             letter-spacing: .12em;
+            line-height: 1.6;
             text-transform: uppercase;
         }
         .footer::before {
@@ -174,46 +169,40 @@
             font-size: 1rem;
             letter-spacing: .2em;
         }
-
-        @keyframes softBloom {
-            0% { transform: translate3d(-2%, -1%, 0) rotate(0deg) scale(1); }
-            50% { transform: translate3d(2%, 1%, 0) rotate(3deg) scale(1.04); }
-            100% { transform: translate3d(-1%, 2%, 0) rotate(-2deg) scale(1.02); }
-        }
         @keyframes arrive {
             from { opacity: 0; transform: translateY(14px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @media (max-width: 600px) {
             body { background-attachment: scroll; }
-            .invitation { background: rgba(255, 250, 246, .92); }
-        }
-        @media (max-width: 380px) {
-            .invitation { padding: 54px 25px 36px; }
-            .sprig-left { left: 12px; }
-            .sprig-right { right: 12px; }
+            .invitation {
+                min-height: min(760px, calc(100svh - 32px));
+                padding: 66px 28px 42px;
+                border-radius: 48% 48% 28px 28px / 18% 18% 28px 28px;
+            }
+            .corner-left { left: 10px; }
+            .corner-right { right: 10px; }
         }
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-            body::before { animation: none; }
         }
     </style>
 </head>
 <body>
     <main class="invitation">
-        <span class="floral-sprig sprig-left" aria-hidden="true">❧</span>
-        <span class="floral-sprig sprig-right" aria-hidden="true">❧</span>
+        <span class="corner-sprig corner-left" aria-hidden="true">❧</span>
+        <span class="corner-sprig corner-right" aria-hidden="true">❧</span>
         <p class="eyebrow">Walimatulurus</p>
         <div class="divider" aria-hidden="true">✿</div>
         <h1>Amira<span class="ampersand">&amp;</span>Syahir</h1>
-        <p class="message">Dengan penuh kesyukuran dan sukacita, kami menjemput anda meraikan hari bahagia kami.</p>
+        <p class="message">Dengan penuh kesyukuran dan sukacita,<br>kami menjemput anda meraikan hari bahagia kami.</p>
+        <img class="cover-art" src="cover.png" alt="" aria-hidden="true">
         <button class="button" id="openBtn" type="button">
             <span aria-hidden="true">♡</span> INVITATION CARD
         </button>
         <p class="footer">Dengan kasih, kami menanti kehadiran anda</p>
     </main>
 
-    <!-- Letakkan Music2.mp3 dalam folder yang sama dengan fail HTML ini. -->
     <audio id="bgMusic2" loop preload="auto">
         <source src="Music2.mp3" type="audio/mpeg">
         Pelayar anda tidak menyokong audio.
