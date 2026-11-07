@@ -21,7 +21,6 @@
             background-size:auto, 40px 40px, 40px 40px, auto;
             background-position:center, 0 0, 20px 20px, center;
         }
-        /* Cahaya warna lembut bergerak perlahan untuk kesan live background. */
         body::before {
             position:fixed; z-index:-1; inset:-25%; content:""; pointer-events:none;
             background:
@@ -31,8 +30,17 @@
             background-size:150% 150%;
             animation:softBloom 24s ease-in-out infinite alternate;
         }
+        .live-pattern {
+            position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none;
+            opacity:.62;
+        }
+        .live-pattern svg { width:100%; height:100%; display:block; }
+        .branch { transform-box:fill-box; transform-origin:center; animation:branchSway 12s ease-in-out infinite alternate; }
+        .branch.delay { animation-delay:-6s; }
+        .bird { animation:birdFloat 18s ease-in-out infinite alternate; }
+        .bird.delay { animation-delay:-9s; }
         .invitation {
-            position:relative; width:min(100%,470px); padding:58px 34px 42px; overflow:hidden;
+            position:relative; z-index:1; width:min(100%,470px); padding:58px 34px 42px; overflow:hidden;
             background:radial-gradient(ellipse at 50% 0,rgba(255,255,255,.95),transparent 55%),rgba(255,250,246,.96);
             border:1px solid rgba(168,102,104,.3); border-radius:220px 220px 28px 28px;
             box-shadow:0 24px 70px rgba(73,59,54,.16); animation:arrive .8s ease-out both;
@@ -63,19 +71,60 @@
         .footer { margin:22px 0 0; color:#a38e84; font-family:Arial,sans-serif; font-size:.7rem; letter-spacing:.12em; text-transform:uppercase; }
         .footer::before { display:block; margin-bottom:10px; color:var(--leaf); content:"❧  ✿  ❧"; font-size:1rem; letter-spacing:.2em; }
         @keyframes softBloom {
-            0% { transform:translate3d(-2%, -1%, 0) rotate(0deg) scale(1); }
-            50% { transform:translate3d(2%, 1%, 0) rotate(3deg) scale(1.04); }
-            100% { transform:translate3d(-1%, 2%, 0) rotate(-2deg) scale(1.02); }
+            0% { transform:translate3d(-2%,-1%,0) rotate(0deg) scale(1); }
+            50% { transform:translate3d(2%,1%,0) rotate(3deg) scale(1.04); }
+            100% { transform:translate3d(-1%,2%,0) rotate(-2deg) scale(1.02); }
         }
+        @keyframes branchSway { from { transform:rotate(-1.5deg); } to { transform:rotate(1.5deg); } }
+        @keyframes birdFloat { from { transform:translate(0,0); } to { transform:translate(22px,-12px); } }
         @keyframes arrive { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
+        @media (max-width:600px) { .live-pattern { opacity:.42; } }
         @media (max-width:380px) { .invitation { padding:54px 25px 36px; } .sprig-left { left:12px; } .sprig-right { right:12px; } }
         @media (prefers-reduced-motion:reduce) {
             *,*::before,*::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
-            body::before { animation:none; }
+            body::before,.branch,.bird { animation:none!important; }
         }
     </style>
 </head>
 <body>
+    <div class="live-pattern" aria-hidden="true">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <g fill="none" stroke="#849078" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".72">
+                <g class="branch">
+                    <path d="M-40 315 Q95 255 185 155 Q230 105 270 42 M88 267 Q75 205 35 175 M140 215 Q205 220 246 184 M198 145 Q165 98 160 58 M225 103 Q275 112 310 83"/>
+                    <path d="M34 176 Q12 144 6 127 M38 178 Q68 163 78 143 M245 184 Q270 157 276 135 M244 184 Q279 193 300 181 M160 61 Q137 37 135 17 M163 63 Q191 51 203 32 M305 84 Q326 57 326 39"/>
+                    <g fill="#a8b79c" stroke="none">
+                        <ellipse cx="25" cy="150" rx="8" ry="19" transform="rotate(-35 25 150)"/><ellipse cx="65" cy="157" rx="8" ry="19" transform="rotate(40 65 157)"/>
+                        <ellipse cx="263" cy="157" rx="8" ry="19" transform="rotate(30 263 157)"/><ellipse cx="282" cy="188" rx="8" ry="19" transform="rotate(-65 282 188)"/>
+                        <ellipse cx="145" cy="37" rx="8" ry="19" transform="rotate(-35 145 37)"/><ellipse cx="190" cy="48" rx="8" ry="19" transform="rotate(45 190 48)"/>
+                        <ellipse cx="318" cy="57" rx="8" ry="19" transform="rotate(25 318 57)"/>
+                    </g>
+                </g>
+                <g class="branch delay" transform="translate(1200 800) rotate(180)">
+                    <path d="M-40 315 Q95 255 185 155 Q230 105 270 42 M88 267 Q75 205 35 175 M140 215 Q205 220 246 184 M198 145 Q165 98 160 58 M225 103 Q275 112 310 83"/>
+                    <path d="M34 176 Q12 144 6 127 M38 178 Q68 163 78 143 M245 184 Q270 157 276 135 M244 184 Q279 193 300 181 M160 61 Q137 37 135 17 M163 63 Q191 51 203 32 M305 84 Q326 57 326 39"/>
+                    <g fill="#a8b79c" stroke="none">
+                        <ellipse cx="25" cy="150" rx="8" ry="19" transform="rotate(-35 25 150)"/><ellipse cx="65" cy="157" rx="8" ry="19" transform="rotate(40 65 157)"/>
+                        <ellipse cx="263" cy="157" rx="8" ry="19" transform="rotate(30 263 157)"/><ellipse cx="282" cy="188" rx="8" ry="19" transform="rotate(-65 282 188)"/>
+                        <ellipse cx="145" cy="37" rx="8" ry="19" transform="rotate(-35 145 37)"/><ellipse cx="190" cy="48" rx="8" ry="19" transform="rotate(45 190 48)"/>
+                        <ellipse cx="318" cy="57" rx="8" ry="19" transform="rotate(25 318 57)"/>
+                    </g>
+                </g>
+            </g>
+            <g fill="#c58486" opacity=".75">
+                <g transform="translate(275 170)"><circle cx="0" cy="-9" r="7"/><circle cx="9" cy="0" r="7"/><circle cx="0" cy="9" r="7"/><circle cx="-9" cy="0" r="7"/><circle r="4" fill="#d5ae78"/></g>
+                <g transform="translate(159 57) scale(.75)"><circle cx="0" cy="-9" r="7"/><circle cx="9" cy="0" r="7"/><circle cx="0" cy="9" r="7"/><circle cx="-9" cy="0" r="7"/><circle r="4" fill="#d5ae78"/></g>
+                <g transform="translate(928 655) scale(.9)"><circle cx="0" cy="-9" r="7"/><circle cx="9" cy="0" r="7"/><circle cx="0" cy="9" r="7"/><circle cx="-9" cy="0" r="7"/><circle r="4" fill="#d5ae78"/></g>
+            </g>
+            <g class="bird" fill="none" stroke="#806f67" stroke-width="3" stroke-linecap="round" opacity=".6">
+                <path d="M0 16 Q15 0 30 16 Q45 0 60 16" transform="translate(400 150) scale(.8)"/>
+                <path d="M0 16 Q15 0 30 16 Q45 0 60 16" transform="translate(760 235) scale(.65)"/>
+            </g>
+            <g class="bird delay" fill="none" stroke="#806f67" stroke-width="3" stroke-linecap="round" opacity=".55">
+                <path d="M0 16 Q15 0 30 16 Q45 0 60 16" transform="translate(940 390) scale(.8)"/>
+            </g>
+        </svg>
+    </div>
     <main class="invitation">
         <span class="floral-sprig sprig-left" aria-hidden="true">❧</span>
         <span class="floral-sprig sprig-right" aria-hidden="true">❧</span>
@@ -96,7 +145,6 @@
         const openBtn = document.getElementById('openBtn');
         const rsvpUrl = 'https://flying-lemur-9kfrww.my.canva.site/perkahwinan-syahiramira';
         openBtn.addEventListener('click', async () => {
-            // Buka RSVP di tab baharu supaya halaman ini kekal terbuka untuk memainkan lagu.
             window.open(rsvpUrl, '_blank', 'noopener,noreferrer');
             try { await audio.play(); }
             catch (error) { console.error('Audio playback failed:', error); }
