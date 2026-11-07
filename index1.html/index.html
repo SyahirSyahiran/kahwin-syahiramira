@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding RSVP & Music</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #111827;
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+        .box {
+            background: #1f2937;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            max-width: 90%;
+            width: 400px;
+        }
+        .btn {
+            display: block;
+            margin-top: 20px;
+            background-color: #2563eb;
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+        }
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        <h2>Undangan Perkahwinan</h2>
+        <p style="margin-top: 10px; font-size: 0.95rem; color: #9ca3af;" id="statusText">Memuatkan muzik latar belakang...</p>
+        
+        <!-- Butang untuk terus buka laman RSVP Canva -->
+        <button class="btn" id="openBtn">Buka Laman RSVP 💌</button>
+    </div>
+
+    <!-- Elemen Audio Tersembunyi (Autoplay) -->
+    <audio id="bgMusic" autoplay loop preload="auto">
+        <source src="Music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const audio = document.getElementById('bgMusic');
+        const openBtn = document.getElementById('openBtn');
+        const statusText = document.getElementById('statusText');
+
+        // Cuba mainkan audio secara automatik sebaik sahaja web dibuka
+        window.addEventListener('DOMContentLoaded', () => {
+            audio.play().then(() => {
+                statusText.innerText = "Muzik sedang dimainkan secara automatik 🎶";
+            }).catch(error => {
+                statusText.innerText = "Sila klik di mana-mana skrin atau butang untuk aktifkan muzik.";
+            });
+        });
+
+        // Jika pelayar sekat autoplay, sentuhan atau klik pertama di mana-mana skrin akan terus hidupkan lagu
+        ['click', 'touchstart', 'scroll'].forEach(eventType => {
+            window.addEventListener(eventType, () => {
+                if (audio.paused) {
+                    audio.play();
+                    statusText.innerText = "Muzik sedang dimainkan 🎶";
+                }
+            }, { once: true });
+        });
+
+        // Apabila tetamu klik butang buka RSVP, ia buka tab baru ke Canva
+        openBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+            }
+            window.open('https://flying-lemur-9kfrww.my.canva.site', '_blank');
+        });
+    </script>
+
+</body>
+</html>
