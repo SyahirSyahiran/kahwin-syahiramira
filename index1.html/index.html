@@ -1,223 +1,202 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#f3e5cf">
-    <title>Walimatulurus | Amira &amp; Syahir</title>
-    <style>
-        :root {
-            --ink: #4b342d;
-            --muted: #8a7266;
-            --rose: #b97679;
-            --rose-dark: #8e5356;
-            --leaf: #89917b;
-        }
-        * { box-sizing: border-box; }
-        body {
-            min-height: 100vh;
-            margin: 0;
-            display: grid;
-            place-items: center;
-            padding: 22px 16px;
-            color: var(--ink);
-            font-family: Georgia, 'Times New Roman', serif;
-            text-align: center;
-            background: #efe2ce url('imej.png') center / cover fixed no-repeat;
-        }
-        .invitation {
-            position: relative;
-            isolation: isolate;
-            width: min(100%, 560px);
-            min-height: min(760px, calc(100vh - 44px));
-            padding: clamp(62px, 10vh, 92px) clamp(28px, 7vw, 58px) 48px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: rgba(255, 250, 244, .94);
-            border: 1px solid rgba(168, 102, 104, .28);
-            border-radius: 48% 48% 30px 30px / 25% 25% 30px 30px;
-            box-shadow: 0 24px 70px rgba(73, 59, 54, .22);
-            animation: arrive .8s ease-out both;
-        }
-        .invitation::before,
-        .invitation::after {
-            position: absolute;
-            z-index: -1;
-            color: rgba(168, 102, 104, .18);
-            line-height: 1;
-            pointer-events: none;
-        }
-        .invitation::before {
-            content: "✿";
-            top: 28px;
-            left: 18px;
-            font-size: clamp(64px, 12vw, 94px);
-            transform: rotate(-24deg);
-        }
-        .invitation::after {
-            content: "❀";
-            right: 18px;
-            bottom: 20px;
-            font-size: clamp(66px, 12vw, 96px);
-            transform: rotate(20deg);
-        }
-        .corner-sprig {
-            position: absolute;
-            top: 28%;
-            color: rgba(132, 144, 120, .6);
-            font-size: 1.65rem;
-            pointer-events: none;
-        }
-        .corner-left { left: 16px; transform: rotate(-25deg); }
-        .corner-right { right: 16px; transform: scaleX(-1) rotate(-25deg); }
-        .eyebrow {
-            margin: 0 0 28px;
-            color: var(--rose);
-            font-family: Arial, sans-serif;
-            font-size: .75rem;
-            letter-spacing: .25em;
-            text-transform: uppercase;
-        }
-        .divider {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            margin: 0 auto 24px;
-            color: var(--rose);
-            font-size: 1.15rem;
-        }
-        .divider::before,
-        .divider::after {
-            width: 48px;
-            height: 1px;
-            content: "";
-            background: #d7b8ad;
-        }
-        h1 {
-            margin: 0;
-            font-size: clamp(3.2rem, 11vw, 5rem);
-            font-weight: normal;
-            line-height: .98;
-        }
-        .ampersand {
-            display: block;
-            margin: 10px 0;
-            color: var(--rose);
-            font-size: clamp(2rem, 6vw, 2.7rem);
-            font-style: italic;
-            line-height: 1;
-        }
-        .message {
-            max-width: 390px;
-            margin: 30px auto 0;
-            color: var(--muted);
-            font-size: clamp(1.05rem, 3.4vw, 1.25rem);
-            line-height: 1.75;
-        }
-        /* Imej2 menggantikan ruang tengah sambil nama dan teks jemputan dikekalkan. */
-        .center-image {
-            display: block;
-            width: min(100%, 340px);
-            max-height: 190px;
-            margin: 22px auto 0;
-            object-fit: contain;
-            border-radius: 8px;
-            box-shadow: 0 8px 24px rgba(73, 59, 54, .12);
-        }
-        .button {
-            position: relative;
-            z-index: 1;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
-            min-height: 58px;
-            margin-top: 24px;
-            padding: 15px 20px;
-            color: #fff;
-            background: linear-gradient(110deg, #bd7c7d, #92575a);
-            border: 0;
-            border-radius: 999px;
-            box-shadow: 0 10px 24px rgba(142, 83, 86, .22);
-            font-family: Arial, sans-serif;
-            font-size: .95rem;
-            font-weight: 700;
-            letter-spacing: .035em;
-            cursor: pointer;
-            transition: transform .2s ease, box-shadow .2s ease;
-        }
-        .button:hover { box-shadow: 0 13px 28px rgba(142, 83, 86, .3); transform: translateY(-2px); }
-        .button:focus-visible { outline: 3px solid #d6a5a0; outline-offset: 4px; }
-        .footer {
-            margin: 24px 0 0;
-            color: #927d71;
-            font-family: Arial, sans-serif;
-            font-size: .72rem;
-            letter-spacing: .12em;
-            line-height: 1.6;
-            text-transform: uppercase;
-        }
-        .footer::before {
-            display: block;
-            margin-bottom: 10px;
-            color: var(--leaf);
-            content: "❧  ✿  ❧";
-            font-size: 1rem;
-            letter-spacing: .2em;
-        }
-        @keyframes arrive {
-            from { opacity: 0; transform: translateY(14px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @media (max-width: 600px) {
-            body { background-attachment: scroll; }
-            .invitation {
-                min-height: min(760px, calc(100svh - 32px));
-                padding: 58px 28px 38px;
-                border-radius: 48% 48% 28px 28px / 18% 18% 28px 28px;
-            }
-            .center-image { max-height: 150px; margin-top: 18px; }
-            .corner-left { left: 10px; }
-            .corner-right { right: 10px; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f3e5cf">
+  <title>Walimatulurus | Amira &amp; Syahir</title>
+  <style>
+    :root {
+      --ink: #4b342d;
+      --muted: #8a7266;
+      --rose: #b97679;
+      --rose-dark: #8e5356;
+      --leaf: #89917b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      margin: 0;
+      display: grid;
+      place-items: center;
+      padding: 22px 16px;
+      color: var(--ink);
+      font-family: Georgia, 'Times New Roman', serif;
+      text-align: center;
+      background: #efe2ce url('imej.png') center / cover fixed no-repeat;
+    }
+
+    .invitation {
+      position: relative;
+      width: min(100%, 560px);
+      min-height: min(760px, calc(100vh - 44px));
+      padding: 60px 28px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: rgba(255, 250, 244, .94);
+      border: 1px solid rgba(168, 102, 104, .28);
+      border-radius: 48% 48% 30px 30px / 25% 25% 30px 30px;
+      box-shadow: 0 24px 70px rgba(73, 59, 54, .22);
+    }
+
+    .corner-sprig {
+      position: absolute;
+      top: 28%;
+      color: rgba(132, 144, 120, .6);
+      font-size: 1.65rem;
+      pointer-events: none;
+    }
+    .corner-left { left: 16px; transform: rotate(-25deg); }
+    .corner-right { right: 16px; transform: scaleX(-1) rotate(-25deg); }
+
+    .eyebrow {
+      margin: 0 0 28px;
+      color: var(--rose);
+      font-family: Arial, sans-serif;
+      font-size: .75rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      margin: 0 auto 24px;
+      color: var(--rose);
+      font-size: 1.15rem;
+    }
+    .divider::before,
+    .divider::after {
+      width: 48px;
+      height: 1px;
+      content: "";
+      background: #d7b8ad;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3.2rem, 11vw, 5rem);
+      font-weight: normal;
+      line-height: .98;
+    }
+
+    .ampersand {
+      display: block;
+      margin: 10px 0;
+      color: var(--rose);
+      font-size: clamp(2rem, 6vw, 2.7rem);
+      font-style: italic;
+      line-height: 1;
+    }
+
+    .message {
+      max-width: 390px;
+      margin: 30px auto 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 3.4vw, 1.25rem);
+      line-height: 1.75;
+    }
+
+    .center-image {
+      display: block;
+      width: min(100%, 300px);
+      max-height: 190px;
+      margin: 22px auto 0;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(73, 59, 54, .12);
+      background: rgba(255,255,255,.25);
+      padding: 10px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 58px;
+      margin-top: 24px;
+      padding: 15px 20px;
+      color: #fff;
+      background: linear-gradient(110deg, #bd7c7d, #92575a);
+      border: 0;
+      border-radius: 999px;
+      box-shadow: 0 10px 24px rgba(142, 83, 86, .22);
+      font-family: Arial, sans-serif;
+      font-size: .95rem;
+      font-weight: 700;
+      letter-spacing: .035em;
+      cursor: pointer;
+    }
+
+    .footer {
+      margin: 24px 0 0;
+      color: #927d71;
+      font-family: Arial, sans-serif;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      line-height: 1.6;
+      text-transform: uppercase;
+    }
+
+    .footer::before {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--leaf);
+      content: "❧  ✿  ❧";
+      font-size: 1rem;
+      letter-spacing: .2em;
+    }
+  </style>
 </head>
 <body>
-    <main class="invitation">
-        <span class="corner-sprig corner-left" aria-hidden="true">❧</span>
-        <span class="corner-sprig corner-right" aria-hidden="true">❧</span>
-        <p class="eyebrow">Walimatulurus</p>
-        <div class="divider" aria-hidden="true">✿</div>
-        <h1>Amira<span class="ampersand">&amp;</span>Syahir</h1>
-        <p class="message">Dengan penuh kesyukuran dan sukacita,<br>kami menjemput anda meraikan hari bahagia kami.</p>
-        <img class="center-image" src="imej2.png" alt="Hiasan jemputan perkahwinan" loading="lazy">
-        <button class="button" id="openBtn" type="button">
-            <span aria-hidden="true">♡</span> INVITATION CARD
-        </button>
-        <p class="footer">Dengan kasih, kami menanti kehadiran anda</p>
-    </main>
+  <main class="invitation">
+    <span class="corner-sprig corner-left" aria-hidden="true">❧</span>
+    <span class="corner-sprig corner-right" aria-hidden="true">❧</span>
 
-    <audio id="bgMusic2" loop preload="auto">
-        <source src="Music2.mp3" type="audio/mpeg">
-        Pelayar anda tidak menyokong audio.
-    </audio>
-    <script>
-        const audio = document.getElementById('bgMusic2');
-        const openBtn = document.getElementById('openBtn');
-        const rsvpUrl = 'https://flying-lemur-9kfrww.my.canva.site/perkahwinan-syahiramira';
-        openBtn.addEventListener('click', async () => {
-            window.open(rsvpUrl, '_blank', 'noopener,noreferrer');
-            try { await audio.play(); }
-            catch (error) { console.error('Audio playback failed:', error); }
-        });
-    </script>
+    <p class="eyebrow">Walimatulurus</p>
+    <div class="divider" aria-hidden="true">✿</div>
+
+    <h1>Amira<span class="ampersand">&amp;</span>Syahir</h1>
+
+    <p class="message">
+      Dengan penuh kesyukuran dan sukacita,<br>
+      kami menjemput anda meraikan hari bahagia kami.
+    </p>
+
+    <img class="center-image" src="imej2.png" alt="Gambar hiasan undangan">
+
+    <button class="button" type="button">
+      <span aria-hidden="true">♡</span> INVITATION CARD
+    </button>
+
+    <p class="footer">Dengan kasih, kami menanti kehadiran anda</p>
+  </main>
+
+  <audio id="bgMusic2" loop preload="auto">
+    <source src="Music2.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const audio = document.getElementById('bgMusic2');
+    const button = document.querySelector('.button');
+
+    button.addEventListener('click', async () => {
+      window.open('https://flying-lemur-9kfrww.my.canva.site/perkahwinan-syahiramira', '_blank', 'noopener,noreferrer');
+      try {
+        await audio.play();
+      } catch (error) {
+        console.log('Audio autoplay blocked by browser');
+      }
+    });
+  </script>
 </body>
 </html>
