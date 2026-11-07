@@ -30,6 +30,7 @@
 
     .invitation {
       position: relative;
+      isolation: isolate;
       width: min(100%, 560px);
       min-height: min(760px, calc(100vh - 44px));
       padding: 60px 28px 48px;
@@ -38,7 +39,9 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      background: rgba(255, 250, 244, .94);
+      background:
+        linear-gradient(rgba(255, 250, 244, .58), rgba(255, 250, 244, .58)),
+        url('imej2.png') center / cover no-repeat;
       border: 1px solid rgba(168, 102, 104, .28);
       border-radius: 48% 48% 30px 30px / 25% 25% 30px 30px;
       box-shadow: 0 24px 70px rgba(73, 59, 54, .22);
@@ -47,7 +50,7 @@
     .corner-sprig {
       position: absolute;
       top: 28%;
-      color: rgba(132, 144, 120, .6);
+      color: rgba(132, 144, 120, .72);
       font-size: 1.65rem;
       pointer-events: none;
     }
@@ -104,26 +107,16 @@
       line-height: 1.75;
     }
 
-    .center-image {
-      display: block;
-      width: min(100%, 300px);
-      max-height: 190px;
-      margin: 22px auto 0;
-      object-fit: contain;
-      border-radius: 8px;
-      box-shadow: 0 8px 24px rgba(73, 59, 54, .12);
-      background: rgba(255,255,255,.25);
-      padding: 10px;
-    }
-
     .button {
+      position: relative;
+      z-index: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
       width: 100%;
       min-height: 58px;
-      margin-top: 24px;
+      margin-top: 40px;
       padding: 15px 20px;
       color: #fff;
       background: linear-gradient(110deg, #bd7c7d, #92575a);
@@ -135,18 +128,20 @@
       font-weight: 700;
       letter-spacing: .035em;
       cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease;
     }
+    .button:hover { box-shadow: 0 13px 28px rgba(142, 83, 86, .3); transform: translateY(-2px); }
+    .button:focus-visible { outline: 3px solid #d6a5a0; outline-offset: 4px; }
 
     .footer {
-      margin: 24px 0 0;
-      color: #927d71;
+      margin: 28px 0 0;
+      color: #806b61;
       font-family: Arial, sans-serif;
       font-size: .72rem;
       letter-spacing: .12em;
       line-height: 1.6;
       text-transform: uppercase;
     }
-
     .footer::before {
       display: block;
       margin-bottom: 10px;
@@ -154,6 +149,21 @@
       content: "❧  ✿  ❧";
       font-size: 1rem;
       letter-spacing: .2em;
+    }
+
+    @media (max-width: 600px) {
+      body { background-attachment: scroll; }
+      .invitation {
+        min-height: min(760px, calc(100svh - 32px));
+        padding: 58px 28px 38px;
+        border-radius: 48% 48% 28px 28px / 18% 18% 28px 28px;
+      }
+      .corner-left { left: 10px; }
+      .corner-right { right: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
   </style>
 </head>
@@ -164,37 +174,34 @@
 
     <p class="eyebrow">Walimatulurus</p>
     <div class="divider" aria-hidden="true">✿</div>
-
     <h1>Amira<span class="ampersand">&amp;</span>Syahir</h1>
-
     <p class="message">
       Dengan penuh kesyukuran dan sukacita,<br>
       kami menjemput anda meraikan hari bahagia kami.
     </p>
 
-    <img class="center-image" src="imej2.png" alt="Gambar hiasan undangan">
-
-    <button class="button" type="button">
+    <button class="button" id="openBtn" type="button">
       <span aria-hidden="true">♡</span> INVITATION CARD
     </button>
-
     <p class="footer">Dengan kasih, kami menanti kehadiran anda</p>
   </main>
 
   <audio id="bgMusic2" loop preload="auto">
     <source src="Music2.mp3" type="audio/mpeg">
+    Pelayar anda tidak menyokong audio.
   </audio>
 
   <script>
     const audio = document.getElementById('bgMusic2');
-    const button = document.querySelector('.button');
+    const openBtn = document.getElementById('openBtn');
+    const rsvpUrl = 'https://flying-lemur-9kfrww.my.canva.site/perkahwinan-syahiramira';
 
-    button.addEventListener('click', async () => {
-      window.open('https://flying-lemur-9kfrww.my.canva.site/perkahwinan-syahiramira', '_blank', 'noopener,noreferrer');
+    openBtn.addEventListener('click', async () => {
+      window.open(rsvpUrl, '_blank', 'noopener,noreferrer');
       try {
         await audio.play();
       } catch (error) {
-        console.log('Audio autoplay blocked by browser');
+        console.error('Audio playback failed:', error);
       }
     });
   </script>
